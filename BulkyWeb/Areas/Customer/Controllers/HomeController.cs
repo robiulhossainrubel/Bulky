@@ -22,14 +22,14 @@ namespace BulkyWeb.Areas.Customer.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Product> productList = _unitOfWork.Products.GetAll(includeProperties:"Category");
+            IEnumerable<Product> productList = _unitOfWork.Products.GetAll(includeProperties:"Category,ProductImages");
             return View(productList);
         }
         public IActionResult Details(int productId)
         {
             ShoppingCart cart = new()
             {
-                Product = _unitOfWork.Products.Get(u => u.Id == productId, includeProperties: "Category"),
+                Product = _unitOfWork.Products.Get(u => u.Id == productId, includeProperties: "Category,ProductImages"),
                 Count = 1,
                 ProductId = productId
 
